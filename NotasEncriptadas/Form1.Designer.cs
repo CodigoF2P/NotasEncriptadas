@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             lblPassword = new Label();
             txtPassword = new TextBox();
             btnShowPassword = new Button();
@@ -58,6 +59,8 @@
             // 
             // btnShowPassword
             // 
+            btnShowPassword.BackgroundImage = Properties.Resources.ojo2;
+            btnShowPassword.BackgroundImageLayout = ImageLayout.Zoom;
             btnShowPassword.Location = new Point(160, 27);
             btnShowPassword.Name = "btnShowPassword";
             btnShowPassword.Size = new Size(25, 23);
@@ -85,6 +88,8 @@
             // 
             // btnPIN
             // 
+            btnPIN.BackgroundImage = Properties.Resources.ojo2;
+            btnPIN.BackgroundImageLayout = ImageLayout.Zoom;
             btnPIN.Location = new Point(160, 71);
             btnPIN.Name = "btnPIN";
             btnPIN.Size = new Size(25, 23);
@@ -124,6 +129,7 @@
             Controls.Add(txtPassword);
             Controls.Add(lblPassword);
             HelpButton = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(212, 173);
             MinimizeBox = false;
