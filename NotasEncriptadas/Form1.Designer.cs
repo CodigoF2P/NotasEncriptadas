@@ -105,6 +105,7 @@
             btnNew.TabIndex = 6;
             btnNew.Text = "&Nuevo";
             btnNew.UseVisualStyleBackColor = true;
+            btnNew.Click += btnNew_Click;
             // 
             // btnOpen
             // 
@@ -114,6 +115,7 @@
             btnOpen.TabIndex = 7;
             btnOpen.Text = "&Abrir";
             btnOpen.UseVisualStyleBackColor = true;
+            btnOpen.Click += btnOpen_Click;
             // 
             // Form1
             // 
