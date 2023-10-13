@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             lblPassword = new Label();
             txtPassword = new TextBox();
@@ -37,6 +38,7 @@
             btnPIN = new Button();
             btnNew = new Button();
             btnOpen = new Button();
+            ttMessage = new ToolTip(components);
             SuspendLayout();
             // 
             // lblPassword
@@ -153,5 +155,6 @@
         private Button btnPIN;
         private Button btnNew;
         private Button btnOpen;
+        private ToolTip ttMessage;
     }
 }

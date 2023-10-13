@@ -8,6 +8,9 @@ namespace NotasEncriptadas
         public Form1()
         {
             InitializeComponent();
+
+            this.ttMessage.SetToolTip(this.txtPassword, "La clave debe contener mínimo 8 caracteres y máximo 50.");
+            this.ttMessage.SetToolTip(this.txtPIN, "El PIN debe contener mínimo 4 caracteres y máximo 12.");
         }
 
         private Boolean showPassword = false;
@@ -43,9 +46,7 @@ namespace NotasEncriptadas
 
         private void Form1_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
         {//Información de la aplicación
-            MessageBox.Show("La clave debe contener mínimo 8 caracteres y máximo 50.\n" +
-                "El PIN debe contener mínimo 4 números y máximo 12.\n" +
-                "La clave y el PIN sirven para codificar y decodificar el texto.\n" +
+            MessageBox.Show("La clave y el PIN sirven para codificar y decodificar el texto.\n" +
                 "Si se introduce algún dato mal al abrir el archivo, \n" +
                 "se abrirá el archivo pero no se decodificará correctamente.\n" +
                 "Se pueden crear archivos con distintas contraseñas y PIN,\n" +
