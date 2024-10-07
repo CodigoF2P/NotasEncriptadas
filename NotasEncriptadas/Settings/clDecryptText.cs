@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
-namespace NotasEncriptadas.Settings
+namespace EncriptarCadenasTexto
 {
     internal class clDecryptText
     {
@@ -22,7 +17,6 @@ namespace NotasEncriptadas.Settings
 
             return decryptedTextString;
         }
-
         private string RevertString(string stringOriginalText)//Revertir cadenas de texto
         {
             string invertedString = "";
@@ -34,13 +28,18 @@ namespace NotasEncriptadas.Settings
 
             return invertedString;
         }
-
-        public static string UnicodeStandardDecoding(string encryptedTextString)//Decodificación estándar de Unicode UTF-8
+        private static string UnicodeStandardDecoding(string encryptedTextString)//Decodificación estándar de Unicode UTF-8
         {
-            byte[] bTextBytes = System.Convert.FromBase64String(encryptedTextString);
-            return System.Text.Encoding.UTF8.GetString(bTextBytes);
+            try
+            {
+                byte[] bTextBytes = System.Convert.FromBase64String(encryptedTextString);
+                return System.Text.Encoding.UTF8.GetString(bTextBytes);
+            }
+            catch
+            {
+                return encryptedTextString;
+            }
         }
-
         private string DecryptTextAES(string Data, string Password, int Bits)
         {
             try
@@ -73,7 +72,6 @@ namespace NotasEncriptadas.Settings
                 return String.Concat(Bits);
             }
         }
-
         private byte[] DecryptionAES(byte[] cipherData, byte[] Key, byte[] IV)
         {
             try
@@ -94,17 +92,24 @@ namespace NotasEncriptadas.Settings
                 return cipherData;
             }
         }
-
         private string DeconcatenateKey(string stringTextKeyed, string stringDeconcatenateKey)//Quitar el KEY al string
         {
             string decryptedTextString = "";
             int flagDeconcatenateKey = (stringDeconcatenateKey.Length / 2) + 1;
             int counterFlag = 0;
+            int counterCharacterKey = 0;
+            Random randomCharacter = new Random();
 
             foreach (char c in stringTextKeyed)//Recorremos la cadena por caracter
             {
                 if (flagDeconcatenateKey == counterFlag)//Quitamos el Key
                 {
+                    if (c != stringDeconcatenateKey[counterCharacterKey])//Validamos el caracter del key
+                    {//Agregamos un caracter aleatorio si el key es incorrecto
+                        decryptedTextString = decryptedTextString + (char)(randomCharacter.Next(33, 122));
+                    }
+
+                    counterCharacterKey++;
                     counterFlag = 0;
                 }
                 else//Agregamos por caracter la cadena original
@@ -112,11 +117,13 @@ namespace NotasEncriptadas.Settings
                     decryptedTextString = decryptedTextString + c;
                     counterFlag++;
                 }
+
+                if (stringDeconcatenateKey.Length == counterCharacterKey)
+                    counterCharacterKey = 0;
             }
 
             return decryptedTextString;
         }
-
         private string CharacterDictionary(string stringOriginalText)//Cambiar caracteres
         {
             string processedTextString = "";

@@ -1,6 +1,6 @@
 ﻿namespace NotasEncriptadas
 {
-    partial class Form1
+    partial class frmLogin
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             lblPassword = new Label();
             txtPassword = new TextBox();
             btnShowPassword = new Button();
@@ -84,7 +84,7 @@
             txtPIN.Location = new Point(12, 71);
             txtPIN.MaxLength = 12;
             txtPIN.Name = "txtPIN";
-            txtPIN.PasswordChar = '*';
+            txtPIN.PasswordChar = '-';
             txtPIN.Size = new Size(142, 23);
             txtPIN.TabIndex = 4;
             // 
@@ -119,7 +119,7 @@
             btnOpen.UseVisualStyleBackColor = true;
             btnOpen.Click += btnOpen_Click;
             // 
-            // Form1
+            // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -138,7 +138,7 @@
             MaximumSize = new Size(212, 173);
             MinimizeBox = false;
             MinimumSize = new Size(212, 173);
-            Name = "Form1";
+            Name = "frmLogin";
             Text = "Entrar";
             HelpButtonClicked += Form1_HelpButtonClicked;
             ResumeLayout(false);

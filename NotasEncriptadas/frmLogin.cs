@@ -1,11 +1,10 @@
 using NotasEncriptadas.Settings;
-using System.IO;
 
 namespace NotasEncriptadas
 {
-    public partial class Form1 : Form
+    public partial class frmLogin : Form
     {
-        public Form1()
+        public frmLogin()
         {
             InitializeComponent();
 
@@ -34,7 +33,7 @@ namespace NotasEncriptadas
         {//Ocultar o mostrar el PIN
             if (showPIN)
             {
-                txtPIN.PasswordChar = '*';
+                txtPIN.PasswordChar = '-';
                 showPIN = false;
             }
             else
@@ -132,8 +131,8 @@ namespace NotasEncriptadas
                                 clGlobalSetting.filePath = openFileDialog.FileName;
 
                                 //Obtiene el texto codificado y lo guarda
-                                clGlobalSetting.encodedText =
-                                    System.IO.File.ReadAllText(clGlobalSetting.filePath);
+                                clGlobalSetting.encodedText = System.IO.File.ReadAllText(clGlobalSetting.filePath);
+                                clGlobalSetting.openFile = true;
 
                                 //Abre la ventana donde se guarda la información a codificar
                                 this.Hide();

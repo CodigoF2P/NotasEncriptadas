@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NotasEncriptadas.Settings
+namespace EncriptarCadenasTexto
 {
     internal class clEncryptText
     {
@@ -22,7 +18,6 @@ namespace NotasEncriptadas.Settings
 
             return encryptedTextString;
         }
-
         private string CharacterDictionary(string stringOriginalText)//Cambiar caracteres
         {
             string processedTextString = "";
@@ -135,7 +130,6 @@ namespace NotasEncriptadas.Settings
             }
             return processedTextString;
         }
-
         private string ConcatenateKey(string stringOriginalText, string stringConcatenateKey)//Concatenar el KEY al string
         {
             string processedTextString = "";
@@ -168,7 +162,6 @@ namespace NotasEncriptadas.Settings
 
             return processedTextString;
         }
-
         private string RevertString(string stringOriginalText)//Revertir cadenas de texto
         {
             string invertedString = "";
@@ -180,7 +173,6 @@ namespace NotasEncriptadas.Settings
 
             return invertedString;
         }
-
         private byte[] EncryptionAES(byte[] InformacionInicial, byte[] Key, byte[] IV)
         {
             try
@@ -235,7 +227,6 @@ namespace NotasEncriptadas.Settings
             }
 
         }
-
         private static string UnicodeStandardEncoding(string stringOriginalText)//Codificación estándar de Unicode UTF-8
         {
             byte[] bTextBytes = Encoding.UTF8.GetBytes(stringOriginalText);

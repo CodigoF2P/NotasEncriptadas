@@ -81,12 +81,14 @@
             tsmiSave.Name = "tsmiSave";
             tsmiSave.Size = new Size(180, 22);
             tsmiSave.Text = "&Guardar";
+            tsmiSave.Click += tsmiSave_Click;
             // 
             // tsmiSaveClose
             // 
             tsmiSaveClose.Name = "tsmiSaveClose";
             tsmiSaveClose.Size = new Size(180, 22);
             tsmiSaveClose.Text = "G&uardar y Cerrar";
+            tsmiSaveClose.Click += tsmiSaveClose_Click;
             // 
             // tssSeparator
             // 
@@ -98,6 +100,7 @@
             tsmiClose.Name = "tsmiClose";
             tsmiClose.Size = new Size(180, 22);
             tsmiClose.Text = "&Cerrar";
+            tsmiClose.Click += tsmiClose_Click;
             // 
             // tsmiUtilities
             // 
@@ -167,7 +170,10 @@
             Controls.Add(msMenu);
             MainMenuStrip = msMenu;
             Name = "frmTextNotes";
-            Text = "Encriptar nota ()";
+            Text = "Encriptar nota";
+            FormClosing += frmTextNotes_FormClosing;
+            FormClosed += frmTextNotes_FormClosed;
+            Load += frmTextNotes_Load;
             msMenu.ResumeLayout(false);
             msMenu.PerformLayout();
             ResumeLayout(false);
