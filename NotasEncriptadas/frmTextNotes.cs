@@ -25,8 +25,9 @@ namespace NotasEncriptadas
             if (clGlobalSetting.openFile)//Archivo abierto
             {
                 clDecryptText objDecrypt = new clDecryptText();
+                FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
 
-                this.Text = this.Text + " (" + clGlobalSetting.filePath + ")";
+                this.Text = this.Text + " (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
                 txtEncryptText.Text = objDecrypt.Decrypt(clGlobalSetting.encodedText, clGlobalSetting.encryptionPIN,
                     clGlobalSetting.encryptionPassword);
             }
