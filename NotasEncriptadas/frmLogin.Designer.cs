@@ -58,6 +58,7 @@
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(142, 23);
             txtPassword.TabIndex = 1;
+            txtPassword.KeyDown += txtPassword_KeyDown;
             // 
             // btnShowPassword
             // 
@@ -87,6 +88,7 @@
             txtPIN.PasswordChar = '-';
             txtPIN.Size = new Size(142, 23);
             txtPIN.TabIndex = 4;
+            txtPIN.KeyDown += txtPIN_KeyDown;
             // 
             // btnPIN
             // 
@@ -101,20 +103,20 @@
             // 
             // btnNew
             // 
-            btnNew.Location = new Point(12, 100);
+            btnNew.Location = new Point(109, 100);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(75, 23);
-            btnNew.TabIndex = 6;
+            btnNew.TabIndex = 7;
             btnNew.Text = "&Nuevo";
             btnNew.UseVisualStyleBackColor = true;
             btnNew.Click += btnNew_Click;
             // 
             // btnOpen
             // 
-            btnOpen.Location = new Point(110, 100);
+            btnOpen.Location = new Point(12, 100);
             btnOpen.Name = "btnOpen";
             btnOpen.Size = new Size(75, 23);
-            btnOpen.TabIndex = 7;
+            btnOpen.TabIndex = 6;
             btnOpen.Text = "&Abrir";
             btnOpen.UseVisualStyleBackColor = true;
             btnOpen.Click += btnOpen_Click;

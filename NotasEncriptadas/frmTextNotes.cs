@@ -18,51 +18,41 @@ namespace NotasEncriptadas
         {
             InitializeComponent();
         }
+        private string savedText = "";
 
         private void frmTextNotes_Load(object sender, EventArgs e)
         {
-            //this.Text = this.Text + " (Ver. " + Application.ProductVersion + ")";
             if (clGlobalSetting.openFile)//Archivo abierto
             {
-                clDecryptText objDecrypt = new clDecryptText();
                 FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
-
                 this.Text = this.Text + " (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
-                txtEncryptText.Text = objDecrypt.Decrypt(clGlobalSetting.encodedText, clGlobalSetting.encryptionPIN,
-                    clGlobalSetting.encryptionPassword);
+                txtEncryptText.Text = DesencriptarArchivoTexto(clGlobalSetting.filePath);
+                savedText = txtEncryptText.Text;
             }
             else//Archivo nuevo
-            {
                 this.Text = this.Text + " (NUEVA)";
-            }
         }
 
         private void frmTextNotes_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Aun se puede cancelar el cierre del formulario (Evento)
             if (ValidarCambiosEchos())
-            {//Si hay cambios sin guardar en el archivo 
-                if (MessageBox.Show("Hay cambios sin guardara ¿Quieres cerrar la aplicacion?",
-                    "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) != DialogResult.Yes)
-                {
+                if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres cerrar la aplicacion?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) != DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
                     e.Cancel = true;//Cancelar el evento de cierre
-                }
-            }
+        }
+
+        private string DesencriptarArchivoTexto(string filePath)
+        {
+            clDecryptText objDecrypt = new clDecryptText();
+            return objDecrypt.Decrypt(clGlobalSetting.encodedText, clGlobalSetting.encryptionPIN, clGlobalSetting.encryptionPassword);
         }
 
         private Boolean ValidarCambiosEchos()
-        {
+        {//Validar que no halla cambios sin guardar
             if (clGlobalSetting.openFile)//Archivo abierto
-            {
-                return false;
-            }
+                return (savedText != txtEncryptText.Text);
             else//Archivo nuevo
-            {
-                if (txtEncryptText.Text != "")
-                    return true;//Cambios echos
-                else
-                    return false;//Sin cambios
-            }
+                return (txtEncryptText.Text != "");
         }
 
         private void frmTextNotes_FormClosed(object sender, FormClosedEventArgs e)
@@ -98,7 +88,7 @@ namespace NotasEncriptadas
                     swFicheroTexto.Write(sTextoCodificado);
                     swFicheroTexto.Flush();
                     swFicheroTexto.Close();
-                    MessageBox.Show("Cambios guardados correctamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    savedText = txtEncryptText.Text;
                     return true;
                 }
                 catch (Exception ex)
@@ -130,9 +120,9 @@ namespace NotasEncriptadas
                             swFicheroTexto.Write(sTextoCodificado);
                             swFicheroTexto.Flush();
                             swFicheroTexto.Close();
-                            MessageBox.Show("Archivo guardado correctamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             clGlobalSetting.openFile = true;
                             clGlobalSetting.filePath = sfdGuardarArchivo.FileName;
+                            savedText = txtEncryptText.Text;
                             return true;
                         }
                         catch (Exception ex)
@@ -154,8 +144,8 @@ namespace NotasEncriptadas
 
         private void tsmiSave_Click(object sender, EventArgs e)
         {
-            if (!GuardarArchivo())
-                MessageBox.Show("No se pudo guardar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (GuardarArchivo())
+                MessageBox.Show("Cambios guardados correctamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
