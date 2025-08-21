@@ -15,5 +15,6 @@ namespace NotasEncriptadas.Settings
         public static string encodedText = "";
         
         public static bool openFile = false;
+        public static bool changeSettings = false;
     }
 }

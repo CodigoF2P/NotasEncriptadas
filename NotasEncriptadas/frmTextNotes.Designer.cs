@@ -69,12 +69,14 @@
             tsmiNew.Name = "tsmiNew";
             tsmiNew.Size = new Size(180, 22);
             tsmiNew.Text = "&Nuevo";
+            tsmiNew.Click += tsmiNew_Click;
             // 
             // tsmiOpen
             // 
             tsmiOpen.Name = "tsmiOpen";
             tsmiOpen.Size = new Size(180, 22);
             tsmiOpen.Text = "&Abrir";
+            tsmiOpen.Click += tsmiOpen_Click;
             // 
             // tsmiSave
             // 

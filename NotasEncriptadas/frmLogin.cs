@@ -81,7 +81,7 @@ namespace NotasEncriptadas
             return false;//El largo se valida dentro de las cajas de texto
         }
 
-        private void OpenNotes(bool openFile)
+        private void OpenNotes(bool bOpenFile)
         {//Abrir formulario de notas
             try
             {
@@ -89,8 +89,9 @@ namespace NotasEncriptadas
                 //Guarda la contraseña y el PIN para codificar el archivo
                 clGlobalSetting.encryptionPassword = txtPassword.Text;
                 clGlobalSetting.encryptionPIN = txtPIN.Text;
+                clGlobalSetting.changeSettings = false;
 
-                if (openFile)
+                if (bOpenFile)
                 {
                     //Buscar el archivo codificado
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -109,7 +110,7 @@ namespace NotasEncriptadas
                         }
                     }
                 }
-                clGlobalSetting.openFile = openFile;
+                clGlobalSetting.openFile = bOpenFile;
 
                 //Abre la ventana donde se guarda la información a codificar
                 this.Hide();
