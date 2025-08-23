@@ -120,7 +120,7 @@ namespace NotasEncriptadas
             //Revisar si el archivo actual tiene cambios
             if (ValidateChangesMade())
             {
-                if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres crear un nuevo archivo?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) != DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
+                if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres crear un nuevo archivo?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
                     bFileNew = true;
                 else
                     bFileNew = false;
@@ -135,7 +135,7 @@ namespace NotasEncriptadas
             //Revisar si el archivo actual tiene cambios
             if (ValidateChangesMade())
             {
-                if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres abrir otro archivo?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) != DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
+                if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres abrir otro archivo?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
                     bOpenAnotherFile = true;
                 else
                     bOpenAnotherFile = false;
