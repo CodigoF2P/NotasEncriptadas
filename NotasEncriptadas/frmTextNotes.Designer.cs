@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTextNotes));
             msMenu = new MenuStrip();
             tsmiFile = new ToolStripMenuItem();
             tsmiNew = new ToolStripMenuItem();
@@ -67,40 +68,40 @@
             // tsmiNew
             // 
             tsmiNew.Name = "tsmiNew";
-            tsmiNew.Size = new Size(180, 22);
+            tsmiNew.Size = new Size(160, 22);
             tsmiNew.Text = "&Nuevo";
             tsmiNew.Click += tsmiNew_Click;
             // 
             // tsmiOpen
             // 
             tsmiOpen.Name = "tsmiOpen";
-            tsmiOpen.Size = new Size(180, 22);
+            tsmiOpen.Size = new Size(160, 22);
             tsmiOpen.Text = "&Abrir";
             tsmiOpen.Click += tsmiOpen_Click;
             // 
             // tsmiSave
             // 
             tsmiSave.Name = "tsmiSave";
-            tsmiSave.Size = new Size(180, 22);
+            tsmiSave.Size = new Size(160, 22);
             tsmiSave.Text = "&Guardar";
             tsmiSave.Click += tsmiSave_Click;
             // 
             // tsmiSaveClose
             // 
             tsmiSaveClose.Name = "tsmiSaveClose";
-            tsmiSaveClose.Size = new Size(180, 22);
+            tsmiSaveClose.Size = new Size(160, 22);
             tsmiSaveClose.Text = "G&uardar y Cerrar";
             tsmiSaveClose.Click += tsmiSaveClose_Click;
             // 
             // tssSeparator
             // 
             tssSeparator.Name = "tssSeparator";
-            tssSeparator.Size = new Size(177, 6);
+            tssSeparator.Size = new Size(157, 6);
             // 
             // tsmiClose
             // 
             tsmiClose.Name = "tsmiClose";
-            tsmiClose.Size = new Size(180, 22);
+            tsmiClose.Size = new Size(160, 22);
             tsmiClose.Text = "&Cerrar";
             tsmiClose.Click += tsmiClose_Click;
             // 
@@ -116,12 +117,14 @@
             tsmiPassword.Name = "tsmiPassword";
             tsmiPassword.Size = new Size(182, 22);
             tsmiPassword.Text = "&Cambiar Contraseña";
+            tsmiPassword.Click += tsmiPassword_Click;
             // 
             // tsmiNIP
             // 
             tsmiNIP.Name = "tsmiNIP";
             tsmiNIP.Size = new Size(182, 22);
             tsmiNIP.Text = "Cambiar &NIP";
+            tsmiNIP.Click += tsmiNIP_Click;
             // 
             // tsmiHelp
             // 
@@ -170,6 +173,7 @@
             ClientSize = new Size(479, 361);
             Controls.Add(txtEncryptText);
             Controls.Add(msMenu);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = msMenu;
             Name = "frmTextNotes";
             Text = "Encriptar nota";

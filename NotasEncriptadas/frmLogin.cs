@@ -25,7 +25,7 @@ namespace NotasEncriptadas
             showPassword = !showPassword;
         }
 
-        private void btnPIN_Click(object sender, EventArgs e)
+        private void btnShowPIN_Click(object sender, EventArgs e)
         {//Ocultar o mostrar el PIN
             if (showPIN)
                 txtPIN.PasswordChar = '-';
@@ -85,6 +85,7 @@ namespace NotasEncriptadas
         {//Abrir formulario de notas
             try
             {
+                bool bOpenForm = true;
                 frmTextNotes frmText = new frmTextNotes();
                 //Guarda la contraseña y el PIN para codificar el archivo
                 clGlobalSetting.encryptionPassword = txtPassword.Text;
@@ -93,6 +94,7 @@ namespace NotasEncriptadas
 
                 if (bOpenFile)
                 {
+                    bOpenForm = false;
                     //Buscar el archivo codificado
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
@@ -103,6 +105,7 @@ namespace NotasEncriptadas
 
                         if (openFileDialog.ShowDialog() == DialogResult.OK)
                         {
+                            bOpenForm = true;
                             //Obtiene la ruta del archivo y la guarda
                             clGlobalSetting.filePath = openFileDialog.FileName;
                             //Obtiene el texto codificado y lo guarda
@@ -113,8 +116,11 @@ namespace NotasEncriptadas
                 clGlobalSetting.openFile = bOpenFile;
 
                 //Abre la ventana donde se guarda la información a codificar
-                this.Hide();
-                frmText.Show();
+                if(bOpenForm)
+                {
+                    this.Hide();
+                    frmText.Show();
+                }
             }
             catch (Exception ex)
             {//Captura error

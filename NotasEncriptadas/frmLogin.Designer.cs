@@ -35,7 +35,7 @@
             btnShowPassword = new Button();
             lblPIN = new Label();
             txtPIN = new TextBox();
-            btnPIN = new Button();
+            btnShowPIN = new Button();
             btnNew = new Button();
             btnOpen = new Button();
             ttMessage = new ToolTip(components);
@@ -90,16 +90,16 @@
             txtPIN.TabIndex = 4;
             txtPIN.KeyDown += txtPIN_KeyDown;
             // 
-            // btnPIN
+            // btnShowPIN
             // 
-            btnPIN.BackgroundImage = Properties.Resources.ojo2;
-            btnPIN.BackgroundImageLayout = ImageLayout.Zoom;
-            btnPIN.Location = new Point(160, 71);
-            btnPIN.Name = "btnPIN";
-            btnPIN.Size = new Size(25, 23);
-            btnPIN.TabIndex = 5;
-            btnPIN.UseVisualStyleBackColor = true;
-            btnPIN.Click += btnPIN_Click;
+            btnShowPIN.BackgroundImage = Properties.Resources.ojo2;
+            btnShowPIN.BackgroundImageLayout = ImageLayout.Zoom;
+            btnShowPIN.Location = new Point(160, 71);
+            btnShowPIN.Name = "btnShowPIN";
+            btnShowPIN.Size = new Size(25, 23);
+            btnShowPIN.TabIndex = 5;
+            btnShowPIN.UseVisualStyleBackColor = true;
+            btnShowPIN.Click += btnShowPIN_Click;
             // 
             // btnNew
             // 
@@ -128,7 +128,7 @@
             ClientSize = new Size(196, 134);
             Controls.Add(btnOpen);
             Controls.Add(btnNew);
-            Controls.Add(btnPIN);
+            Controls.Add(btnShowPIN);
             Controls.Add(txtPIN);
             Controls.Add(lblPIN);
             Controls.Add(btnShowPassword);
@@ -154,7 +154,7 @@
         private Button btnShowPassword;
         private Label lblPIN;
         private TextBox txtPIN;
-        private Button btnPIN;
+        private Button btnShowPIN;
         private Button btnNew;
         private Button btnOpen;
         private ToolTip ttMessage;

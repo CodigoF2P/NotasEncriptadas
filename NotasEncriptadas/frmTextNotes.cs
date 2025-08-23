@@ -1,14 +1,5 @@
 ﻿using EncriptarCadenasTexto;
 using NotasEncriptadas.Settings;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NotasEncriptadas
 {
@@ -24,12 +15,7 @@ namespace NotasEncriptadas
         {
             clGlobalSetting.changeSettings = true;
             if (clGlobalSetting.openFile)//Archivo abierto
-            {
-                FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
-                this.Text = this.Text + " (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
-                txtEncryptText.Text = DecryptTextFile();
-                savedText = txtEncryptText.Text;
-            }
+                OpenNote(false);
             else//Archivo nuevo
                 NewNote(false);
         }
@@ -70,6 +56,8 @@ namespace NotasEncriptadas
         {
             if (SaveFile())
                 MessageBox.Show("Cambios guardados correctamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("No se pudo guardar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private Boolean ValidateChangesMade()
@@ -141,6 +129,21 @@ namespace NotasEncriptadas
                 NewNote(true);
         }
 
+        private void tsmiOpen_Click(object sender, EventArgs e)
+        {
+            bool bOpenAnotherFile = true;
+            //Revisar si el archivo actual tiene cambios
+            if (ValidateChangesMade())
+            {
+                if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres abrir otro archivo?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) != DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
+                    bOpenAnotherFile = true;
+                else
+                    bOpenAnotherFile = false;
+            }
+            if (bOpenAnotherFile)
+                OpenNote(true);
+        }
+
         private void NewNote(bool bCaptureInformation)
         {
             if (bCaptureInformation)//Abrir el formulario de login para capturar: clave y contraseña
@@ -151,6 +154,20 @@ namespace NotasEncriptadas
                 txtEncryptText.Text = "";
                 savedText = "";
                 clGlobalSetting.openFile = false;
+            }
+            clGlobalSetting.changeSettings = false;
+        }
+
+        private void OpenNote(bool bAnotherFile)
+        {
+            if (bAnotherFile)//Abrir el formulario de login para capturar informacion, abrir otro archivo
+                OpenFormSettings(2);
+            if (clGlobalSetting.changeSettings)
+            {
+                FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
+                this.Text = this.Text + " (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
+                txtEncryptText.Text = DecryptTextFile();
+                savedText = txtEncryptText.Text;
             }
             clGlobalSetting.changeSettings = false;
         }
@@ -167,22 +184,14 @@ namespace NotasEncriptadas
             frmChanges.ShowDialog();
         }
 
-        private void tsmiOpen_Click(object sender, EventArgs e)
+        private void tsmiPassword_Click(object sender, EventArgs e)
         {
-            //Revisar si el archivo actual tiene cambios
-            if (ValidateChangesMade())
-                OpenFormSettings(2);
-            if (clGlobalSetting.changeSettings)
-            {
-                FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
-                this.Text = this.Text + " (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
-                txtEncryptText.Text = DecryptTextFile();
-                savedText = txtEncryptText.Text;
-            }
-            clGlobalSetting.changeSettings = false;
-            //Si no tiene cambios, abrir el formulario de login para capturar
-            //Clave y contraseña, y seleccionar el archivo
+            OpenFormSettings(3);
+        }
 
+        private void tsmiNIP_Click(object sender, EventArgs e)
+        {
+            OpenFormSettings(4);
         }
     }
 }
