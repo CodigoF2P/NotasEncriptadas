@@ -165,7 +165,7 @@ namespace NotasEncriptadas
             if (clGlobalSetting.changeSettings)
             {
                 FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
-                this.Text = this.Text + " (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
+                this.Text = "Encriptar nota (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
                 txtEncryptText.Text = DecryptTextFile();
                 savedText = txtEncryptText.Text;
             }

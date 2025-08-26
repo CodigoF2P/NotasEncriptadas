@@ -123,7 +123,7 @@
             // 
             tsmiNIP.Name = "tsmiNIP";
             tsmiNIP.Size = new Size(182, 22);
-            tsmiNIP.Text = "Cambiar &NIP";
+            tsmiNIP.Text = "Cambiar &PIN";
             tsmiNIP.Click += tsmiNIP_Click;
             // 
             // tsmiHelp

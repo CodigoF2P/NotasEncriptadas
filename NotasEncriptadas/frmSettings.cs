@@ -111,6 +111,7 @@ namespace NotasEncriptadas
                         clGlobalSetting.encryptionPassword = txtPassword.Text;
                         clGlobalSetting.encryptionPIN = txtPIN.Text;
                         clGlobalSetting.changeSettings = true;
+                        clGlobalSetting.openFile = false;
                         bClose = true;
                     }
                     break;
@@ -138,6 +139,7 @@ namespace NotasEncriptadas
                                 clGlobalSetting.encryptionPassword = txtPassword.Text;
                                 clGlobalSetting.encryptionPIN = txtPIN.Text;
                                 clGlobalSetting.changeSettings = true;
+                                clGlobalSetting.openFile = true;
                                 bClose = true;
                             }
                         }
