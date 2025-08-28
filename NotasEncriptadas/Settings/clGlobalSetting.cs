@@ -11,10 +11,10 @@ namespace NotasEncriptadas.Settings
         public static string encryptionPassword = ""; //Contraseña de encripatacion
         public static string encryptionPIN = "";//PIN de encripatacion
 
-        public static string filePath = "";
-        public static string encodedText = "";
+        public static string filePath = "";//Direccion del archivo
+        public static string encodedText = "";//Texto encritado del archivo
         
-        public static bool openFile = false;
-        public static bool changeSettings = false;
+        public static bool openFile = false;//Archivo abierto .llave
+        public static bool changeSettings = false;//Bandera, de cambios en las propiedades del archivo
     }
 }

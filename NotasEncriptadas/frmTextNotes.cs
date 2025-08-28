@@ -20,98 +20,17 @@ namespace NotasEncriptadas
                 NewNote(false);
         }
 
+        private void frmTextNotes_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();//Cierra la aplicacion
+        }
+
         private void frmTextNotes_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Aun se puede cancelar el cierre del formulario (Evento)
             if (ValidateChangesMade())
                 if (MessageBox.Show("Hay cambios sin guardara y seran descartados ¿Quieres cerrar la aplicacion?", "Informacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) != DialogResult.Yes)//Si hay cambios sin guardar en el archivo, pregunta si los descarta
                     e.Cancel = true;//Cancelar el evento de cierre
-        }
-
-        private void frmTextNotes_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();//Cierra la aplicacion
-        }
-
-        private void tsmiClose_Click(object sender, EventArgs e)
-        {
-            this.Close();//Cierra el formulario
-        }
-
-        private void tsmiSaveClose_Click(object sender, EventArgs e)
-        {
-            if (SaveFile())
-                this.Close();
-            else
-                MessageBox.Show("No se pudo guardar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private string DecryptTextFile()
-        {
-            clDecryptText objDecrypt = new clDecryptText();
-            return objDecrypt.Decrypt(clGlobalSetting.encodedText, clGlobalSetting.encryptionPIN, clGlobalSetting.encryptionPassword);
-        }
-
-        private void tsmiSave_Click(object sender, EventArgs e)
-        {
-            if (SaveFile())
-                MessageBox.Show("Cambios guardados correctamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-                MessageBox.Show("No se pudo guardar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private Boolean ValidateChangesMade()
-        {//Validar que no halla cambios sin guardar
-            if (clGlobalSetting.openFile)//Archivo abierto
-                return (savedText != txtEncryptText.Text);
-            else//Archivo nuevo 
-                return (txtEncryptText.Text != "");
-        }
-
-        private Boolean SaveFile()
-        {
-            StreamWriter swFicheroTexto;
-            string sCodedText;
-            clEncryptText objEncrypt = new clEncryptText();
-
-            if (!clGlobalSetting.openFile)
-            {//Abri explorador de archivo y ponerle nombre para encriptarlo y guardar
-                using (SaveFileDialog sfdGuardarArchivo = new SaveFileDialog())
-                {
-                    //sfdGuardarArchivo.InitialDirectory = "c:\\";
-                    sfdGuardarArchivo.FileName = "ArchivoProtegido";
-                    sfdGuardarArchivo.Filter = "Text files (*.llave)|*.llave";
-                    sfdGuardarArchivo.DefaultExt = ".llave";
-                    sfdGuardarArchivo.RestoreDirectory = true;
-
-                    //Abre el guardador de archivos
-                    if (sfdGuardarArchivo.ShowDialog() == DialogResult.OK)
-                        clGlobalSetting.filePath = sfdGuardarArchivo.FileName;
-                    else
-                        return false;
-                }
-            }
-
-            //Guardar archivo
-            try
-            {
-                swFicheroTexto = new StreamWriter(clGlobalSetting.filePath, false, System.Text.Encoding.Default);
-                sCodedText = objEncrypt.Encrypt(txtEncryptText.Text, clGlobalSetting.encryptionPIN, clGlobalSetting.encryptionPassword);
-                swFicheroTexto.Write(sCodedText);
-                swFicheroTexto.Flush();
-                swFicheroTexto.Close();
-                clGlobalSetting.openFile = true;
-                savedText = txtEncryptText.Text;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al guardar fichero de texto: " + System.Environment.NewLine +
-                    System.Environment.NewLine + ex.GetType().ToString() +
-                    System.Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return false;
-            }
         }
 
         private void tsmiNew_Click(object sender, EventArgs e)
@@ -144,6 +63,69 @@ namespace NotasEncriptadas
                 OpenNote(true);
         }
 
+        private void tsmiSave_Click(object sender, EventArgs e)
+        {
+            if (SaveFile())
+                MessageBox.Show("Cambios guardados correctamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("No se pudo guardar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void tsmiSaveClose_Click(object sender, EventArgs e)
+        {
+            if (SaveFile())
+                this.Close();
+            else
+                MessageBox.Show("No se pudo guardar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void tsmiClose_Click(object sender, EventArgs e)
+        {
+            this.Close();//Cierra el formulario
+        }
+
+        private void tsmiPassword_Click(object sender, EventArgs e)
+        {
+            OpenFormSettings(3);
+        }
+
+        private void tsmiNIP_Click(object sender, EventArgs e)
+        {
+            OpenFormSettings(4);
+        }
+
+        private void tsmiEmail_Click(object sender, EventArgs e)
+        {
+            frmEMail frmEmail = new frmEMail();
+            frmEmail.ShowDialog();
+        }
+
+        private void tsmiAbout_Click(object sender, EventArgs e)
+        {
+            frmAboutUs frmAbout = new frmAboutUs();
+            frmAbout.ShowDialog();
+        }
+
+        private void tsmiDonations_Click(object sender, EventArgs e)
+        {
+            frmDonation frmDonations = new frmDonation();
+            frmDonations.ShowDialog();
+        }
+
+        private void OpenNote(bool bAnotherFile)
+        {
+            if (bAnotherFile)//Abrir el formulario de login para capturar informacion, abrir otro archivo
+                OpenFormSettings(2);
+            if (clGlobalSetting.changeSettings)
+            {
+                FileInfo fInfo = new FileInfo(clGlobalSetting.filePath);
+                this.Text = "Encriptar nota (" + Path.GetFileNameWithoutExtension(fInfo.Name) + ")";
+                txtEncryptText.Text = DecryptTextFile();
+                savedText = txtEncryptText.Text;
+            }
+            clGlobalSetting.changeSettings = false;
+        }
+
         private void NewNote(bool bCaptureInformation)
         {
             if (bCaptureInformation)//Abrir el formulario de login para capturar: clave y contraseña
@@ -154,20 +136,6 @@ namespace NotasEncriptadas
                 txtEncryptText.Text = "";
                 savedText = "";
                 clGlobalSetting.openFile = false;
-            }
-            clGlobalSetting.changeSettings = false;
-        }
-
-        private void OpenNote(bool bAnotherFile)
-        {
-            if (bAnotherFile)//Abrir el formulario de login para capturar informacion, abrir otro archivo
-                OpenFormSettings(2);
-            if (clGlobalSetting.changeSettings)
-            {
-                FileInfo fiArchivo = new FileInfo(clGlobalSetting.filePath);
-                this.Text = "Encriptar nota (" + Path.GetFileNameWithoutExtension(fiArchivo.Name) + ")";
-                txtEncryptText.Text = DecryptTextFile();
-                savedText = txtEncryptText.Text;
             }
             clGlobalSetting.changeSettings = false;
         }
@@ -184,14 +152,68 @@ namespace NotasEncriptadas
             frmChanges.ShowDialog();
         }
 
-        private void tsmiPassword_Click(object sender, EventArgs e)
+        private string DecryptTextFile()
         {
-            OpenFormSettings(3);
+            clDecryptText objDecrypt = new clDecryptText();
+            return objDecrypt.Decrypt(clGlobalSetting.encodedText, clGlobalSetting.encryptionPIN, clGlobalSetting.encryptionPassword);
         }
 
-        private void tsmiNIP_Click(object sender, EventArgs e)
+        private Boolean ValidateChangesMade()
+        {//Validar que no halla cambios sin guardar
+            if (clGlobalSetting.openFile)//Archivo abierto
+                return (savedText != txtEncryptText.Text);
+            else//Archivo nuevo 
+                return (txtEncryptText.Text != "");
+        }
+
+        private Boolean SaveFile()
         {
-            OpenFormSettings(4);
+            StreamWriter swFile;
+            string sCodedText;
+            clEncryptText objEncrypt = new clEncryptText();
+
+            if (!clGlobalSetting.openFile)
+            {//Abri explorador de archivo y ponerle nombre para encriptarlo y guardar
+                using (SaveFileDialog sfdSave = new SaveFileDialog())
+                {
+                    //sfdGuardarArchivo.InitialDirectory = "c:\\";
+                    sfdSave.FileName = "ArchivoProtegido";
+                    sfdSave.Filter = "Text files (*.llave)|*.llave";
+                    sfdSave.DefaultExt = ".llave";
+                    sfdSave.RestoreDirectory = true;
+
+                    //Abre el guardador de archivos
+                    if (sfdSave.ShowDialog() == DialogResult.OK)
+                    {
+                        clGlobalSetting.filePath = sfdSave.FileName;
+                        FileInfo fInfo = new FileInfo(sfdSave.FileName);
+                        this.Text = "Encriptar nota (" + Path.GetFileNameWithoutExtension(fInfo.Name) + ")";
+                    }
+                    else
+                        return false;
+                }
+            }
+
+            //Guardar archivo
+            try
+            {
+                swFile = new StreamWriter(clGlobalSetting.filePath, false, System.Text.Encoding.Default);
+                sCodedText = objEncrypt.Encrypt(txtEncryptText.Text, clGlobalSetting.encryptionPIN, clGlobalSetting.encryptionPassword);
+                swFile.Write(sCodedText);
+                swFile.Flush();
+                swFile.Close();
+                clGlobalSetting.openFile = true;
+                savedText = txtEncryptText.Text;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar fichero de texto: " + System.Environment.NewLine +
+                    System.Environment.NewLine + ex.GetType().ToString() +
+                    System.Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }

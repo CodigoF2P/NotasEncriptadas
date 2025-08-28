@@ -4,6 +4,9 @@ namespace NotasEncriptadas
 {
     public partial class frmLogin : Form
     {
+        private Boolean showPassword = false;
+        private Boolean showPIN = false;
+
         public frmLogin()
         {
             InitializeComponent();
@@ -11,9 +14,6 @@ namespace NotasEncriptadas
             this.ttMessage.SetToolTip(this.txtPassword, "La contraseña debe contener mínimo 8 caracteres y máximo 50.");
             this.ttMessage.SetToolTip(this.txtPIN, "El PIN debe contener mínimo 4 caracteres y máximo 12.");
         }
-
-        private Boolean showPassword = false;
-        private Boolean showPIN = false;
 
         private void btnShowPassword_Click(object sender, EventArgs e)
         {//Ocultar o mostrar la contraseña
@@ -78,7 +78,7 @@ namespace NotasEncriptadas
                 MessageBox.Show("El PIN debe contener mínimo 4 números y máximo 12. Solo pueden ser números.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 return true;
-            return false;//El largo se valida dentro de las cajas de texto
+            return false;//Se valida el largo dentro de las cajas de texto
         }
 
         private void OpenNotes(bool bOpenFile)

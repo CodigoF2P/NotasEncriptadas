@@ -68,40 +68,40 @@
             // tsmiNew
             // 
             tsmiNew.Name = "tsmiNew";
-            tsmiNew.Size = new Size(160, 22);
+            tsmiNew.Size = new Size(180, 22);
             tsmiNew.Text = "&Nuevo";
             tsmiNew.Click += tsmiNew_Click;
             // 
             // tsmiOpen
             // 
             tsmiOpen.Name = "tsmiOpen";
-            tsmiOpen.Size = new Size(160, 22);
+            tsmiOpen.Size = new Size(180, 22);
             tsmiOpen.Text = "&Abrir";
             tsmiOpen.Click += tsmiOpen_Click;
             // 
             // tsmiSave
             // 
             tsmiSave.Name = "tsmiSave";
-            tsmiSave.Size = new Size(160, 22);
+            tsmiSave.Size = new Size(180, 22);
             tsmiSave.Text = "&Guardar";
             tsmiSave.Click += tsmiSave_Click;
             // 
             // tsmiSaveClose
             // 
             tsmiSaveClose.Name = "tsmiSaveClose";
-            tsmiSaveClose.Size = new Size(160, 22);
+            tsmiSaveClose.Size = new Size(180, 22);
             tsmiSaveClose.Text = "G&uardar y Cerrar";
             tsmiSaveClose.Click += tsmiSaveClose_Click;
             // 
             // tssSeparator
             // 
             tssSeparator.Name = "tssSeparator";
-            tssSeparator.Size = new Size(157, 6);
+            tssSeparator.Size = new Size(177, 6);
             // 
             // tsmiClose
             // 
             tsmiClose.Name = "tsmiClose";
-            tsmiClose.Size = new Size(160, 22);
+            tsmiClose.Size = new Size(180, 22);
             tsmiClose.Text = "&Cerrar";
             tsmiClose.Click += tsmiClose_Click;
             // 
@@ -138,12 +138,14 @@
             tsmiEmail.Name = "tsmiEmail";
             tsmiEmail.Size = new Size(194, 22);
             tsmiEmail.Text = "&Enviar correo de ayuda";
+            tsmiEmail.Click += tsmiEmail_Click;
             // 
             // tsmiAbout
             // 
             tsmiAbout.Name = "tsmiAbout";
             tsmiAbout.Size = new Size(194, 22);
             tsmiAbout.Text = "&Acerca de";
+            tsmiAbout.Click += tsmiAbout_Click;
             // 
             // tssSeparator2
             // 
@@ -155,6 +157,7 @@
             tsmiDonations.Name = "tsmiDonations";
             tsmiDonations.Size = new Size(194, 22);
             tsmiDonations.Text = "&Donaciones";
+            tsmiDonations.Click += tsmiDonations_Click;
             // 
             // txtEncryptText
             // 
